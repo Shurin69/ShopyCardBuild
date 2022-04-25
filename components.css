@@ -1,0 +1,398 @@
+* {
+    margin: 0;
+    padding: 0;
+    line-height: 1.15;
+    box-sizing: border-box;
+    outline: 0;
+    text-decoration: none;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+    color: #000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+    font-size: 1em;
+}
+
+em,
+strong,
+i,
+b,
+address,
+cite {
+    font-style: normal;
+    font-weight: 400;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+input[type=submit],
+button {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+:root {
+    --mobile-width: calc(100% - 20px);
+    --mobile-large-width: 460px;
+    --tablet-width: 740px;
+    --tablet-large-width: 1000px;
+    --desktop-width: 1170px;
+    --black: 0, 0, 0;
+    --gray: 82, 84, 102;
+    --white: 255, 255, 255;
+    --red: 255, 0, 0;
+    --green: 0, 255, 0;
+    --blue: 70, 132, 226;
+    --gold: 255, 203, 69;
+    --fontsize-body: 14px;
+    --freg: "Geometria";
+    --fbold: "Geometria-Bold";
+    --vreg: "VisueltPro-Regular";
+    --vbold: "VisueltPro-Bold";
+    --col: 70px;
+    --gap: 30px;
+}
+
+input,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: transparent;
+    border: none;
+}
+
+:host {
+    --animation-time: .35s;
+    --blue: 70, 132, 226;
+    --red: 255, 106, 85;
+    --green: 131, 191, 110;
+    --gap: 10px;
+}
+
+@font-face {
+    src: url(../fonts/Gilroy.woff);
+    font-family: "Gilroy";
+    font-display: swap;
+}
+
+.inpt {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.inpt-title {
+    font: 13px/23px "Gilroy";
+}
+
+.memo .inpt-value {
+    height: 168px;
+    margin-bottom: 0;
+}
+
+.inpt-value,
+.inpt-mask {
+    width: 100%;
+    height: 72px;
+    padding: 0 var(--gap);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    border-bottom: 4px solid rgba(70, 132, 226, 0.6);
+    background: #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    font: 18px "Gilroy";
+    color: #525466;
+    margin-bottom: 24px
+}
+
+.inpt-value:before {
+    display: block;
+    content: "";
+}
+
+.inpt-value.focused,
+.inpt-value:focus {
+    border-color: rgb(var(--blue));
+}
+
+.inpt-value img {
+    width: 8px;
+    margin-right: var(--gap);
+    transition: 0.35s ease;
+}
+
+.inpt-value img:hover {
+    transform: rotate(90deg);
+}
+
+.inpt-value-placeholder {
+    font-size: 13px;
+    pointer-events: none;
+}
+
+.inpt-mask,
+.inpt-tip {
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.inpt-tip {
+    top: 75%;
+    font-size: 11px;
+    transform: scale(0.95);
+}
+
+.inpt-mask,
+.inpt-tip,
+.inpt-mask-placeholder,
+.inpt-date-img {
+    transition: var(--animation-time) ease;
+    position: absolute;
+}
+
+.inpt-mask-date {
+    opacity: 0;
+    position: absolute;
+}
+
+.inpt-mask-date,
+.inpt-date-img {
+    bottom: 15px;
+    right: var(--gap);
+    width: 48px;
+}
+
+.inpt-mask-placeholder {
+    opacity: 0;
+    left: var(--gap);
+    width: 100%;
+    font-size: 10px;
+    bottom: 3px;
+    color: #ddd;
+}
+
+.inpt-value:focus+.inpt-mask-placeholder {
+    opacity: 1;
+}
+
+.inpt-date-img {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.inpt.error {
+    border-color: rgb(var(--red));
+}
+
+.inpt.error .inpt-tip,
+.inpt.error .inpt-value-placeholder,
+.inpt.error .inpt-value::placeholder {
+    color: rgb(var(--red));
+}
+
+.inpt.error .inpt-value {
+    color: rgb(var(--red));
+    border-bottom-color: rgb(var(--red));
+}
+
+.inpt.error .inpt-tip,
+.inpt.success .inpt-tip {
+    top: 80%;
+    transform: scale(1);
+    opacity: 1;
+}
+
+.inpt.success {
+    border-color: rgb(var(--green));
+}
+
+.inpt.success .inpt-tip,
+.inpt.success .inpt-value-placeholder,
+.inpt.success .inpt-value::placeholder {
+    color: rgb(var(--green));
+}
+
+.inpt.success .inpt-value {
+    border-bottom-color: rgb(var(--green));
+}
+
+.inpt-checkbox {
+    display: none;
+}
+
+.inpt-checkbox:checked+.inpt-checkbox-label:before {
+    background: #4684E2 url("../../img/checked.svg") no-repeat center;
+    border-color: transparent;
+}
+
+.inpt-checkbox-label {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-bottom: var(--gap);
+}
+
+.inpt-checkbox-label-text {
+    margin-left: var(--gap);
+}
+
+.inpt-checkbox-label:before {
+    content: "";
+    transition: 0.35s ease;
+    background-color: #fff;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    border: 1px solid #525466;
+}
+
+:host {
+    --body-display: none;
+    --body-max-height: 0px;
+}
+
+.g-select {
+    width: 100%;
+    height: 100%;
+    min-width: 80px;
+    position: relative;
+    border: 1px solid #dbdbdb;
+}
+
+.g-select-head {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    white-space: normal;
+    transition: 0.35s ease;
+    padding: 5px 10px;
+}
+
+.g-select-body {
+    width: 100%;
+    max-height: var(--body-max-height);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 2;
+    transition: 0.2s ease;
+}
+
+.g-select.active .g-select-body {
+    overflow: auto;
+    border: 1px solid #dbdbdb;
+}
+
+.g-select.active .g-select-head:after {
+    transform: rotate(-45deg);
+}
+
+.g-select-option {
+    flex: 0 0 30px;
+    width: 100%;
+    margin-bottom: 1px;
+    padding: 0 10px;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.g-select-option:hover,
+.g-select-option.active {
+    background-color: #dbdbdb;
+}
+
+.g-select-arrow {
+    width: 20px;
+}
+
+.g-select-arrow svg {
+    stroke: red;
+    fill: none;
+    width: 8px;
+}
+
+.with-arrow:after {
+    width: 5px;
+    height: 5px;
+    content: "";
+    display: block;
+    flex: 0 0 5px;
+    margin-left: 5px;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transform: rotate(135deg);
+    transition: 0.35s ease;
+}
+
+:host {
+    --var: none;
+    --width: 300px;
+    --height: 150px;
+}
+
+.modaler-cont {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modaler-cont.active {
+    display: flex;
+}
+
+.modaler-inner {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(56, 71, 109, 0.29);
+}
+
+.modaler-close {
+    font-family: inherit;
+    font-weight: 700;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
